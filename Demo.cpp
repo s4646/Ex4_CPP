@@ -11,6 +11,7 @@
 #include "Ambassador.hpp"
 #include "Captain.hpp"
 #include "Contessa.hpp"
+#include "Game.hpp"
 
 using namespace coup;
 
@@ -107,6 +108,7 @@ int main() {
 	players = game_1.players();
 	/*
 		prints:
+		Moshe
 		Yossi
 		Meirav
 		Reut

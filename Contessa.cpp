@@ -7,6 +7,6 @@ namespace coup
 {
     Contessa::Contessa(Game& g, const string& s) : Player(g,s) {}
     Contessa::~Contessa() {}
-    string  Contessa::role() {return "lol";}
+    string  Contessa::role() {return name;}
     void Contessa::block(const Player& other) {}
 }

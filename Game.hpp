@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 #include <vector>
-
 namespace coup
 {
+    class Player;
     class Game
     {
         private:
-            std::vector<std::string> Players;
+            std::vector<Player> Players;
             std::vector<std::pair<std::string,std::string>> turns; // role, action
             int numOfPlayers;
         public:

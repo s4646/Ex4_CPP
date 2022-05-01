@@ -8,7 +8,7 @@ namespace coup
 {
     Ambassador::Ambassador(Game& g, const string& s) : Player(g,s) {}
     Ambassador::~Ambassador() {}
-    string Ambassador::role() {return "lol";}
+    string Ambassador::role() {return name;}
     void Ambassador::transfer(Player& first, Player& second) {};
     void Ambassador::block(Player& other) {}
 }

@@ -16,5 +16,6 @@ namespace coup
     void Player::income() {}
     void Player::foreign_aid() {}
     int Player:: coins() {return 0;}
+    string Player::getName() {return name;}
     void::Player::coup(Player& other) {}
 }

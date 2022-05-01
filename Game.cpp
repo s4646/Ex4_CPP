@@ -8,13 +8,20 @@ namespace coup
 {
     Game::Game()
     {
-        this->Players = vector<string>();
+        this->Players = vector<Player>();
         this->turns = vector<std::pair<string,string>>();
         this->numOfPlayers = 0;
     }
     Game::~Game() {}
-    void Game::coup(string name) {}
-    vector<string> Game::players() {return vector<string>();}
+    vector<string> Game::players()
+    {
+        vector<string> ret;
+        for (size_t i = 0; i < Players.size(); i++)
+        {
+            ret.push_back(Players.at(i).getName());
+        }
+        return ret;
+    }
     string Game::turn() {return "lol";}
     void Game:: resetTurns() {}
 }

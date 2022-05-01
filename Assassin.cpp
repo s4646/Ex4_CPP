@@ -7,6 +7,6 @@ namespace coup
 {
     Assassin::Assassin(Game& g, const string& s) : Player(g,s) {}
     Assassin::~Assassin() {}
-    string Assassin::role() {return "lol";}
+    string Assassin::role() {return name;}
     void Assassin::coup(Player& other) {}
 }

@@ -17,6 +17,7 @@ namespace coup
             void income();
             void foreign_aid();
             int coins();
+            std::string getName();
             virtual void coup(Player&);
     };
 }

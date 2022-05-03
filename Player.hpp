@@ -10,6 +10,7 @@ namespace coup
             Game game;
             std::string name;
             int Coins;
+            bool blocked, couped;
 
         public:
             Player(Game&, const std::string&);
@@ -18,6 +19,8 @@ namespace coup
             void foreign_aid();
             int coins();
             std::string getName();
+            bool isBlocked();
+            bool isCouped();
             virtual void coup(Player&);
     };
 }

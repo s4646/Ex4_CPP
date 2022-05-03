@@ -8,14 +8,16 @@ namespace coup
     {
         private:
             std::vector<Player> Players;
-            std::vector<std::pair<std::string,std::string>> turns; // role, action
+            int currentIndex;
             int numOfPlayers;
         public:
             Game();
             ~Game();
-            void coup(std::string);
             std::vector<std::string> players();
             std::string turn();
-            void resetTurns();
+            void addPlayer(const Player&);
+            void coup();
+            void resetIndex();
+            std::vector<Player> getPlayers();
     };
 }

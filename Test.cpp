@@ -120,8 +120,3 @@ TEST_CASE("NO ERROR")
         CHECK_NOTHROW(contessa.income()); 
     }
 }
-
-TEST_CASE("ERROR")
-{
-    
-}

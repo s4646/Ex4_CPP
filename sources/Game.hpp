@@ -16,8 +16,10 @@ namespace coup
             std::vector<std::string> players();
             std::string turn();
             void addPlayer(const Player&);
-            void coup();
-            void resetIndex();
+            void coup(const std::string&);
+            int index() const;
             std::vector<Player> getPlayers();
+            void handleIndex();
+            std::string winner();
     };
 }

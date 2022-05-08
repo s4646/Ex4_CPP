@@ -14,36 +14,40 @@ namespace coup
         this->Coins = 0;
         this->blocked = false;
         this->couped = false;
-        g.addPlayer(*this);
+        game.addPlayer(*this);
     }
     Player::~Player() {};
 
     void Player::income() 
     {
-        if(Coins<10)
+        validate();
+        if(Coins<MAX_COINS)
         {
             this->Coins++;
         }
         else
         {
-            throw runtime_error("Has 10 coins already");
+            throw runtime_error("coins limit passed.");
         }
+        game.handleIndex();
     }
     void Player::foreign_aid() 
     {
-        if(Coins<9)
+        validate();
+        if(Coins<MAX_COINS-1)
         {
             this->Coins+=2;
         }
         else
         {
-            throw runtime_error("Has 9+ coins already");
+            throw runtime_error("coins limit passed.");
         }
+        game.handleIndex();
     }
-    int Player:: coins() {return Coins;}
+    int Player::coins() const{return Coins;}
     string Player::getName() {return name;}
-    bool Player::isBlocked() {return blocked;}
-    bool Player::isCouped() {return couped;}
+    bool Player::isBlocked() const{return blocked;}
+    bool Player::isCouped() const{return couped;}
     void::Player::coup(Player& other)
     {
         for (size_t i = 0; i < this->game.getPlayers().size(); i++)
@@ -51,10 +55,22 @@ namespace coup
             if(game.getPlayers().at(i).getName() == other.getName())
             {
                 other.couped = true;
-                this->Coins-=7;
+                coupedWho = other.name;
+                this->Coins-=COUP_PAYMENT;
                 return;
             }
         }
         throw runtime_error("Player not found");
+    }
+    void Player::validate()
+    {
+        if(game.players().at(game.index()) != name) {throw runtime_error("Not your turn");}
+        if(this->couped) {return;}
+        if(this->Coins>=MAX_COINS) {throw runtime_error("Must coup with 10 coins");}
+        if(!this->coupedWho.empty())
+        {
+            game.coup(this->coupedWho);
+            this->coupedWho.clear();
+        }
     }
 }

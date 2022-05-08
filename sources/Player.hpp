@@ -1,6 +1,8 @@
 #pragma once
 #include "Game.hpp"
 #include <string>
+#define COUP_PAYMENT 7
+#define MAX_COINS 10
 
 namespace coup
 {
@@ -8,7 +10,7 @@ namespace coup
     {
         protected:
             Game game;
-            std::string name;
+            std::string name, blockedWho, coupedWho;
             int Coins;
             bool blocked, couped;
 
@@ -17,11 +19,12 @@ namespace coup
             ~Player();
             void income();
             void foreign_aid();
-            int coins();
+            int coins() const;
             std::string getName();
-            bool isBlocked();
-            bool isCouped();
+            bool isBlocked() const;
+            bool isCouped() const;
             virtual void coup(Player&);
+            void validate();
         
         friend class Ambassador;
         friend class Assassin;

@@ -11,15 +11,18 @@ namespace coup
     string Captain::role() {return name;}
     void Captain::steal(Player& other)
     {
-        if(other.Coins>=2 && other.Coins<=10)
+        validate();
+        if(other.Coins>=2 && other.Coins<=MAX_COINS)
         {
             this->Coins += 2;
             other.Coins -= 2;
+            game.handleIndex();
         }
         if(other.Coins<2 && other.Coins>=0)
         {
             this->Coins += other.Coins;
             other.Coins = 0;
+            game.handleIndex();
         }
         throw runtime_error("Cannot steal.");
     }

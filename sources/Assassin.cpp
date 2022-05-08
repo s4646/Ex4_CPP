@@ -11,23 +11,25 @@ namespace coup
     string Assassin::role() {return name;}
     void Assassin::coup(Player& other) 
     {
-        if(this->Coins>=7)
-        {
-            Player::coup(other);
-            return;
-        }
-        else
+        validate();
+        if(this->Coins<COUP_PAYMENT)
         {
             for (size_t i = 0; i < game.getPlayers().size(); i++)
             {
                 if(game.getPlayers().at(i).getName() == other.getName())
                 {
                     other.couped = true;
-                    this->Coins-=7;
+                    this->Coins-=3;
+                    game.handleIndex();
                     return;
                 }
             }
-            throw runtime_error("Player not found");
+        }
+        else
+        {
+            Player::coup(other);
+            game.handleIndex();
+            return;
         }
     }
 }

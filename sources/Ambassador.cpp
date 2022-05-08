@@ -11,10 +11,12 @@ namespace coup
     string Ambassador::role() {return name;}
     void Ambassador::transfer(Player& first, Player& second) 
     {
-        if(first.coins()>0 && second.coins()<10)
+        validate();
+        if(first.coins()>0 && second.coins()<MAX_COINS)
         {
             first.Coins--;
             second.Coins++;
+            game.handleIndex();
         }
         else
         {

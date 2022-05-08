@@ -11,11 +11,13 @@ namespace coup
     string Duke::role() {return name;}
     void Duke::tax()
     {
-        if(this->Coins>7)
+        validate();
+        if(this->Coins>COUP_PAYMENT)
         {
             throw runtime_error("coins limit passed.");
         }
         this->Coins+=3;
+        game.handleIndex();
     }
     void Duke::block(Player& other) {}
 }

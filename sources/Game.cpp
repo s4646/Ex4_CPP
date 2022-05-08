@@ -32,26 +32,46 @@ namespace coup
     {
         this->Players.push_back(player);
     }
-    void Game::coup()
+    void Game::coup(const string& couped)
     {
-        if(Players.at((size_t)currentIndex).isCouped())
+        for (size_t i = 0; i < Players.size(); i++)
         {
-            Players.erase(Players.begin()+currentIndex);
+            if(Players.at(i).getName() == couped)
+            {
+                if (Players.at(i).isCouped())
+                {
+                    Players.erase(Players.begin()+i);
+                }
+                else
+                {
+                    throw runtime_error("Player cannot be couped");
+                }
+            }
         }
-        else
-        {
-            throw runtime_error("Player cannot be couped");
-        }
+        throw runtime_error("Player not found");
     }
-    void Game::resetIndex()
-    {
-        if (currentIndex > Players.size()-1)
-        {
-            currentIndex = 0;
-        }
-    }
+    int Game::index() const{return currentIndex;}
     vector<Player> Game::getPlayers()
     {
         return Players;
+    }
+    void Game::handleIndex()
+    {
+        if(currentIndex == Players.size()-1)
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            currentIndex++;
+        }
+    }
+    string Game::winner()
+    {
+        if(Players.size()==1)
+        {
+            return players().at(1);
+        }
+        throw runtime_error("Game not done");
     }
 }

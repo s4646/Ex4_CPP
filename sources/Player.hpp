@@ -12,7 +12,8 @@ namespace coup
             Game game;
             std::string name, blockedWho, coupedWho;
             int Coins;
-            bool blocked, couped;
+            bool blocked, couped, is_foreign_aid;
+            std::string applied;
 
         public:
             Player(Game&, const std::string&);
@@ -24,7 +25,7 @@ namespace coup
             bool isBlocked() const;
             bool isCouped() const;
             virtual void coup(Player&);
-            void validate();
+            virtual void validate();
         
         friend class Ambassador;
         friend class Assassin;

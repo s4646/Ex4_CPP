@@ -57,14 +57,8 @@ namespace coup
     }
     void Game::handleIndex()
     {
-        if(currentIndex == Players.size()-1)
-        {
-            currentIndex = 0;
-        }
-        else
-        {
-            currentIndex++;
-        }
+        currentIndex++;
+        if(currentIndex>=Players.size()) {currentIndex=0;}
     }
     string Game::winner()
     {

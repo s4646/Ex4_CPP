@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.hpp"
+#include "Captain.hpp"
 
 namespace coup
 {
@@ -10,6 +11,6 @@ namespace coup
             ~Ambassador();
             std::string role();
             void transfer(Player&, Player&);
-            void block(Player&);
+            void block(Captain&);
     };
 }

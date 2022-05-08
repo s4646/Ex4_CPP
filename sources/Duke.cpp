@@ -19,5 +19,12 @@ namespace coup
         this->Coins+=3;
         game.handleIndex();
     }
-    void Duke::block(Player& other) {}
+    void Duke::block(Player& other)
+    {
+        if(!other.is_foreign_aid)
+        {
+            throw runtime_error("Cannot block 'foreign aid'");
+        }
+        other.Coins-=3;
+    }
 }

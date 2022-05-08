@@ -1,6 +1,5 @@
 #include "Player.hpp"
 #include <stdexcept>
-#include <typeinfo>
 
 using namespace coup;
 using namespace std;
@@ -14,6 +13,7 @@ namespace coup
         this->Coins = 0;
         this->blocked = false;
         this->couped = false;
+        this->is_foreign_aid = false;
         game.addPlayer(*this);
     }
     Player::~Player() {};
@@ -37,6 +37,7 @@ namespace coup
         if(Coins<MAX_COINS-1)
         {
             this->Coins+=2;
+            is_foreign_aid = true;
         }
         else
         {
@@ -72,5 +73,7 @@ namespace coup
             game.coup(this->coupedWho);
             this->coupedWho.clear();
         }
+        if(!this->applied.empty()) {this->applied.clear();}
+        if(is_foreign_aid) {is_foreign_aid = false;}
     }
 }

@@ -6,7 +6,7 @@ using namespace std;
 
 namespace coup
 {
-    Assassin::Assassin(Game& g, const string& s) : Player(g,s) {}
+    Assassin::Assassin(Game& g, const string& s) : Player(g,s), assassinate(false){}
     Assassin::~Assassin() {}
     string Assassin::role() {return name;}
     void Assassin::coup(Player& other) 

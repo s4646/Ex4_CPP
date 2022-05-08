@@ -5,6 +5,8 @@ namespace coup
 {
     class Assassin : public Player
     {
+        private:
+            bool assassinate;
         public:
             Assassin(Game&, const std::string&);
             ~Assassin();

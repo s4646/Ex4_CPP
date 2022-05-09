@@ -9,6 +9,6 @@ namespace coup
             Contessa(Game&, const std::string&);
             ~Contessa();
             std::string role();
-            void block(const Player&);
+            void block(Player&);
     };
 }

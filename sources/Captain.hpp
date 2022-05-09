@@ -12,7 +12,7 @@ namespace coup
             ~Captain();
             std::string role();
             void steal(Player&);
-            void block(Captain&);
+            void block(Player&);
             virtual void validate();
             int coins_stolen() const;
     };

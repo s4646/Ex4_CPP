@@ -40,7 +40,7 @@ namespace coup
             {
                 if (Players.at(i).isCouped())
                 {
-                    Players.erase(Players.begin()+i);
+                    Players.erase(Players.begin()+(long)i);
                 }
                 else
                 {

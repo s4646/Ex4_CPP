@@ -9,6 +9,11 @@ namespace coup
     Assassin::Assassin(Game& g, const string& s) : Player(g,s), assassinate(false){}
     Assassin::~Assassin() {}
     string Assassin::role() {return name;}
+    void Assassin::validate()
+    {
+        if(assassinate) {assassinate=false;}
+        Player::validate();
+    }
     void Assassin::coup(Player& other) 
     {
         validate();
@@ -20,6 +25,8 @@ namespace coup
                 {
                     other.couped = true;
                     this->Coins-=3;
+                    coupedWho = other.name;
+                    assassinate=true;
                     game.handleIndex();
                     return;
                 }

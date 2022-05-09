@@ -65,7 +65,7 @@ namespace coup
     }
     void Player::validate()
     {
-        if(game.players().at(game.index()) != name) {throw runtime_error("Not your turn");}
+        if(game.players().at((size_t)game.index()) != name) {throw runtime_error("Not your turn");}
         if(this->couped) {return;}
         if(this->Coins>=MAX_COINS) {throw runtime_error("Must coup with 10 coins");}
         if(!this->coupedWho.empty())

@@ -33,7 +33,7 @@ namespace coup
         if(stolen_coins!=0) {stolen_coins=0;}
         Player::validate();
     }
-    void Captain::block(Captain& other)
+    void Captain::block(Player& other)
     {
         Player* ptr = nullptr;
         for (size_t i = 0; i < game.getPlayers().size(); i++)
@@ -41,6 +41,7 @@ namespace coup
             if (game.getPlayers().at(i).name == other.applied)
             {
                 ptr = &game.getPlayers().at(i);
+                break;
             }
         }
         if(ptr==NULL) {throw runtime_error("Player not found");}

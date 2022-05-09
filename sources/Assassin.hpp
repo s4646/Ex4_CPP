@@ -12,5 +12,6 @@ namespace coup
             ~Assassin();
             std::string role();
             virtual void coup(Player&);
+            virtual void validate();
     };
 }

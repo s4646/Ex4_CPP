@@ -8,7 +8,7 @@ namespace coup
         public:
             Contessa(Game&, const std::string&);
             ~Contessa();
-            std::string role();
+            static std::string role();
             void block(Player&);
     };
 }

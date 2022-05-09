@@ -7,7 +7,7 @@ namespace coup
     class Game
     {
         private:
-            std::vector<Player> Players;
+            std::vector<Player*> Players;
             int currentIndex;
             int numOfPlayers;
         public:
@@ -15,11 +15,13 @@ namespace coup
             ~Game();
             std::vector<std::string> players();
             std::string turn();
-            void addPlayer(const Player&);
+            void addPlayer(Player&);
             void coup(const std::string&);
             int index() const;
-            std::vector<Player> getPlayers();
+            std::vector<Player*> getPlayers();
             void handleIndex();
+            void decrementPlayers();
+            void incrementPlayers();
             std::string winner();
     };
 }

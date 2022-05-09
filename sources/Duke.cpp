@@ -8,7 +8,7 @@ namespace coup
 {
     Duke::Duke(Game& g, const string& s) : Player(g,s) {}
     Duke::~Duke() {}
-    string Duke::role() {return name;}
+    string Duke::role() {return "Contessa";}
     void Duke::tax()
     {
         validate();
@@ -17,7 +17,7 @@ namespace coup
             throw runtime_error("coins limit passed.");
         }
         this->Coins+=3;
-        game.handleIndex();
+        (*game).handleIndex();
     }
     void Duke::block(Player& other)
     {

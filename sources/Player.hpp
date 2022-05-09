@@ -9,7 +9,7 @@ namespace coup
     class Player
     {
         protected:
-            Game game;
+            Game* game;
             std::string name, blockedWho, coupedWho;
             int Coins;
             bool blocked, couped, is_foreign_aid;

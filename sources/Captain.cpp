@@ -8,7 +8,7 @@ namespace coup
 {
     Captain::Captain(Game& g, const string& s) : Player(g,s), stolen_coins(0) {}
     Captain::~Captain() {}
-    string Captain::role() {return name;}
+    string Captain::role() {return "Captain";}
     void Captain::steal(Player& other)
     {
         Captain::validate();
@@ -17,14 +17,14 @@ namespace coup
             this->Coins += 2;
             other.Coins -= 2;
             stolen_coins = 2;
-            game.handleIndex();
+            (*game).handleIndex();
         }
         if(other.Coins<2 && other.Coins>=0)
         {
             this->Coins += other.Coins;
             stolen_coins = other.Coins;
             other.Coins = 0;
-            game.handleIndex();
+            (*game).handleIndex();
         }
         throw runtime_error("Cannot steal.");
     }
@@ -36,11 +36,11 @@ namespace coup
     void Captain::block(Player& other)
     {
         Player* ptr = nullptr;
-        for (size_t i = 0; i < game.getPlayers().size(); i++)
+        for (size_t i = 0; i < (*game).getPlayers().size(); i++)
         {
-            if (game.getPlayers().at(i).name == other.applied)
+            if ((*(*game).getPlayers().at(i)).name == other.applied)
             {
-                ptr = &game.getPlayers().at(i);
+                ptr = (*game).getPlayers().at(i);
                 break;
             }
         }

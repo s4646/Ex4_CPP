@@ -8,7 +8,7 @@ namespace coup
 {
     Ambassador::Ambassador(Game& g, const string& s) : Player(g,s) {}
     Ambassador::~Ambassador() {}
-    string Ambassador::role() {return name;}
+    string Ambassador::role() {return "Ambassador";}
     void Ambassador::transfer(Player& first, Player& second) 
     {
         validate();
@@ -16,7 +16,7 @@ namespace coup
         {
             first.Coins--;
             second.Coins++;
-            game.handleIndex();
+            (*game).handleIndex();
         }
         else
         {
@@ -26,11 +26,11 @@ namespace coup
     void Ambassador::block(Captain& other)
     {
         Player* ptr = nullptr;
-        for (size_t i = 0; i < game.getPlayers().size(); i++)
+        for (size_t i = 0; i < (*game).getPlayers().size(); i++)
         {
-            if (game.getPlayers().at(i).name == other.applied)
+            if ((*(*game).getPlayers().at(i)).name == other.applied)
             {
-                ptr = &game.getPlayers().at(i);
+                ptr = (*game).getPlayers().at(i);
             }
         }
         if(ptr==NULL) {throw runtime_error("Player not found");}

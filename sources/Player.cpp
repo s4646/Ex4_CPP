@@ -29,24 +29,17 @@ namespace coup
         {
             this->Coins++;
         }
-        else
-        {
-            throw runtime_error("coins limit passed.");
-        }
+        // else
+        // {
+        //     throw runtime_error("coins limit passed.");
+        // }
         (*game).handleIndex();
     }
     void Player::foreign_aid() 
     {
         validate();
-        if(Coins<MAX_COINS-1)
-        {
-            this->Coins+=2;
-            is_foreign_aid = true;
-        }
-        else
-        {
-            throw runtime_error("coins limit passed.");
-        }
+        this->Coins+=2;
+        is_foreign_aid = true;
         (*game).handleIndex();
     }
     int Player::coins() const{return Coins;}
@@ -67,7 +60,10 @@ namespace coup
                     coupedWho = &other;
                     this->Coins-=COUP_PAYMENT;
                     (*game).coup(other);
-                    (*game).handleIndex();
+                    if((*game).index()==(*game).getNumOfPlayers() || (*game).getPlayers().at((size_t)(*game).index()) == this)
+                    {
+                        (*game).handleIndex();
+                    }
                 return;
                 }
             }
@@ -95,9 +91,9 @@ namespace coup
             (*game).coup(*coupedWho);
             coupedWho = nullptr;
         }
-        if(!this->applied.empty()) {this->applied.clear();}
+        if(this->applied!=nullptr) {this->applied=nullptr;}
         if(is_foreign_aid) {is_foreign_aid = false;}
-        if(!(*game).isStarted()) {(*game).start();}
+        if(!(*game).isStarted() && (*game).getPlayers().size()>1) {(*game).start();}
         if((*game).getPlayers().size()==1)
         {
             throw runtime_error("1 player cant play alone");

@@ -27,6 +27,7 @@ namespace coup
             void incrementPlayers();
             bool isStarted() const;
             void start();
+            int getNumOfPlayers();
             std::string winner();
     };
 }

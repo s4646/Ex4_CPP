@@ -35,7 +35,10 @@ namespace coup
                         assassinate=true;
                         if((*game).getPlayers().size() == 2) {(*game).coup(other);}
                         else {(*game).decrementPlayers();}
-                        (*game).handleIndex();
+                        if((*game).index()==(*game).getNumOfPlayers() || (*game).getPlayers().at((size_t)(*game).index()) == this)
+                        {
+                            (*game).handleIndex();
+                        }
                         return;
                     }
                 }
@@ -45,7 +48,6 @@ namespace coup
         else
         {
             Player::coup(other);
-            (*game).handleIndex();
             return;
         }
     }

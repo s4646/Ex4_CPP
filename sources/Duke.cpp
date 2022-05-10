@@ -8,14 +8,14 @@ namespace coup
 {
     Duke::Duke(Game& g, const string& s) : Player(g,s) {}
     Duke::~Duke() {}
-    string Duke::role() {return "Contessa";}
+    string Duke::role() {return "Duke";}
     void Duke::tax()
     {
         validate();
-        if(this->Coins>COUP_PAYMENT)
-        {
-            throw runtime_error("coins limit passed.");
-        }
+        // if(this->Coins>COUP_PAYMENT)
+        // {
+        //     throw runtime_error("coins limit passed.");
+        // }
         this->Coins+=3;
         (*game).handleIndex();
     }

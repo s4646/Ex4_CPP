@@ -15,7 +15,7 @@ namespace coup
             Player* coupedWho;
             int Coins;
             bool blocked, couped, is_foreign_aid;
-            std::string applied;
+            Player* applied;
 
         public:
             Player(Game&, const std::string&);

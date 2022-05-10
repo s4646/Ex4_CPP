@@ -25,7 +25,7 @@ namespace coup
         {
             throw runtime_error("Cannot block 'foreign aid'");
         }
-        other.Coins-=3;
+        other.Coins-=2;
         (++Coins)--; // fuck you clang-tidy
     }
 }

@@ -21,7 +21,7 @@ namespace coup
             throw runtime_error("Not enough coins.");
         }
         validate();
-        if(this->Coins<COUP_PAYMENT)
+        if(Coins<COUP_PAYMENT && Coins > 0)
         {
             for (size_t i = 0; i < (*game).getPlayers().size(); i++)
             {

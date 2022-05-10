@@ -10,7 +10,7 @@ namespace coup
         public:
             Assassin(Game&, const std::string&);
             ~Assassin();
-            static std::string role();
+            std::string role();
             virtual void coup(Player&);
             virtual void validate();
     };

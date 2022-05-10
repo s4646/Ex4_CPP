@@ -14,13 +14,16 @@ namespace coup
         Player* ptr = nullptr;
         for (size_t i = 0; i < (*game).getPlayers().size(); i++)
         {
-            if((*(*game).getPlayers().at(i)).getName() == other.coupedWho)
+            if((*game).getPlayers().at(i)->getName() == other.coupedWho->name)
             {
+                if((*game).getPlayers().at(i)->role() == other.coupedWho->role())
+                {
                 ptr = (*game).getPlayers().at(i);
                 (*ptr).couped = false;
-                other.coupedWho.clear();
+                other.coupedWho = nullptr;
                 (*game).incrementPlayers();
                 return;
+                }
             }
         }
         throw runtime_error("Player not found");

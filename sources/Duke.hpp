@@ -9,7 +9,7 @@ namespace coup
         public:
             Duke(Game&, const std::string&);
             ~Duke();
-            static std::string role();
+            std::string role();
             void tax();
             void block(Player&);
     };

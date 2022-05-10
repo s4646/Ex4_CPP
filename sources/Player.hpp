@@ -10,7 +10,9 @@ namespace coup
     {
         protected:
             Game* game;
-            std::string name, blockedWho, coupedWho;
+            std::string name;
+            Player* blockedWho;
+            Player* coupedWho;
             int Coins;
             bool blocked, couped, is_foreign_aid;
             std::string applied;
@@ -26,6 +28,7 @@ namespace coup
             bool isCouped() const;
             virtual void coup(Player&);
             virtual void validate();
+            virtual std::string role();
         
         friend class Ambassador;
         friend class Assassin;

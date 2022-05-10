@@ -15,6 +15,7 @@ namespace coup
         this->Players = vector<Player*>();
         this->currentIndex = 0;
         this->numOfPlayers = 0;
+        this->started=false;
     }
     Game::~Game() {}
     vector<string> Game::players()
@@ -35,28 +36,35 @@ namespace coup
     }
     void Game::addPlayer(Player& player)
     {
+        if(started)
+        {
+            throw runtime_error("game started");
+        }
+        if(Players.size()>=MAX_PLAYERS)
+        {
+            throw runtime_error("maximum players");
+        }
         Players.push_back(&player);
         numOfPlayers++;
     }
-    void Game::coup(const string& couped)
+    void Game::coup(Player& couped)
     {
         for (size_t i = 0; i < Players.size(); i++)
         {
-            if((*Players.at(i)).getName() == couped)
+            if(Players.at(i)->getName() == couped.getName())
             {
-                if ((*Players.at(i)).isCouped())
+                if(Players.at(i)->role() == couped.role())
                 {
-                    Players.erase(Players.begin()+(long)i);
-                    numOfPlayers--;
-                    return;
-                }
-                else
-                {
-                    throw runtime_error("Player cannot be couped");
+                    if ((*Players.at(i)).isCouped())
+                    {
+                        Players.erase(Players.begin()+(long)i);
+                        numOfPlayers--;
+                        return;
+                    }
                 }
             }
         }
-        // throw runtime_error("Player not found");
+        // throw runtime_error("Player cannot be couped");
     }
     int Game::index() const{return currentIndex;}
     vector<Player*> Game::getPlayers()
@@ -81,6 +89,8 @@ namespace coup
         }
         throw runtime_error("Game not done");
     }
+    bool Game::isStarted() const{return started;}
+    void Game::start() {started=true;}
     void Game::incrementPlayers() {numOfPlayers++;}
     void Game::decrementPlayers() {numOfPlayers--;}
 }

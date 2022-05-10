@@ -10,7 +10,7 @@ namespace coup
         public:
             Captain(Game&, const std::string&);
             ~Captain();
-            static std::string role();
+            std::string role();
             void steal(Player&);
             void block(Player&);
             virtual void validate();

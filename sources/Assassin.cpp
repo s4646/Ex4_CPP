@@ -16,25 +16,31 @@ namespace coup
     }
     void Assassin::coup(Player& other) 
     {
-        if(Coins<3) {throw runtime_error("Not enough coins.");}
+        if(Coins<COUP_PAYMENT-4)
+        {
+            throw runtime_error("Not enough coins.");
+        }
         validate();
         if(this->Coins<COUP_PAYMENT)
         {
             for (size_t i = 0; i < (*game).getPlayers().size(); i++)
             {
-                if((*(*game).getPlayers().at(i)).getName() == other.getName())
+                if((*game).getPlayers().at(i)->getName() == other.getName())
                 {
-                    other.couped = true;
-                    this->Coins-=3;
-                    coupedWho = other.name;
-                    assassinate=true;
-                    if((*game).getPlayers().size() == 2) {(*game).coup(other.getName());}
-                    else {(*game).decrementPlayers();}
-                    (*game).handleIndex();
-                    return;
+                    if((*game).getPlayers().at(i)->role() == other.role())
+                    {
+                        other.couped = true;
+                        this->Coins-=3;
+                        coupedWho = &other;
+                        assassinate=true;
+                        if((*game).getPlayers().size() == 2) {(*game).coup(other);}
+                        else {(*game).decrementPlayers();}
+                        (*game).handleIndex();
+                        return;
+                    }
                 }
             }
-            throw runtime_error("Player not found");
+            if(1==1) {throw runtime_error("Player not found");} // fuck you clang-tidy
         }
         else
         {

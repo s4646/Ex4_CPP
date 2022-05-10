@@ -9,7 +9,7 @@ namespace coup
         public:
             Ambassador(Game&, const std::string&);
             ~Ambassador();
-            static std::string role();
+            std::string role();
             void transfer(Player&, Player&);
             void block(Captain&);
     };

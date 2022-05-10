@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <typeinfo>
 
 using namespace coup;
 using namespace std;
@@ -15,6 +16,8 @@ namespace coup
         this->blocked = false;
         this->couped = false;
         this->is_foreign_aid = false;
+        coupedWho = nullptr;
+        blockedWho = nullptr;
         (*game).addPlayer(*this);
     }
     Player::~Player() {};
@@ -50,19 +53,23 @@ namespace coup
     string Player::getName() {return name;}
     bool Player::isBlocked() const{return blocked;}
     bool Player::isCouped() const{return couped;}
+    string Player::role() {return "Player";}
     void::Player::coup(Player& other)
     {
-        if(Coins<7) {throw runtime_error("Not enough coins for coup");}
+        if(Coins<COUP_PAYMENT) {throw runtime_error("Not enough coins for coup");}
         for (size_t i = 0; i < (*game).getPlayers().size(); i++)
         {
-            if((*(*game).getPlayers().at(i)).getName() == other.getName())
+            if((*game).getPlayers().at(i)->getName() == other.getName())
             {
-                other.couped = true;
-                coupedWho = other.name;
-                this->Coins-=COUP_PAYMENT;
-                (*game).coup(other.getName());
-                (*game).handleIndex();
+                if((*game).getPlayers().at(i)->role() == other.role())
+                {
+                    other.couped = true;
+                    coupedWho = &other;
+                    this->Coins-=COUP_PAYMENT;
+                    (*game).coup(other);
+                    (*game).handleIndex();
                 return;
+                }
             }
         }
         cout << (*game).index() << '\n';
@@ -79,13 +86,21 @@ namespace coup
             (*game).handleIndex();
             return;
         }
-        if(this->Coins>=MAX_COINS) {throw runtime_error("Must coup with 10 coins");}
-        if(!this->coupedWho.empty())
+        if(this->Coins>=MAX_COINS)
         {
-            (*game).coup(this->coupedWho);
-            this->coupedWho.clear();
+            throw runtime_error("Must coup with 10 coins");
+        }
+        if(this->coupedWho != nullptr)
+        {
+            (*game).coup(*coupedWho);
+            coupedWho = nullptr;
         }
         if(!this->applied.empty()) {this->applied.clear();}
         if(is_foreign_aid) {is_foreign_aid = false;}
+        if(!(*game).isStarted()) {(*game).start();}
+        if((*game).getPlayers().size()==1)
+        {
+            throw runtime_error("1 player cant play alone");
+        }
     }
 }

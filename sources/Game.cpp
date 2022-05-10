@@ -58,7 +58,7 @@ namespace coup
                     if ((*Players.at(i)).isCouped())
                     {
                         Players.erase(Players.begin()+(long)i);
-                        --numOfPlayers;
+                        numOfPlayers--;
                         return;
                     }
                 }
@@ -93,5 +93,5 @@ namespace coup
     void Game::start() {started=true;}
     void Game::incrementPlayers() {numOfPlayers++;}
     void Game::decrementPlayers() {numOfPlayers--;}
-    int Game::getNumOfPlayers() {return numOfPlayers;}
+    int Game::getNumOfPlayers() const{return numOfPlayers;}
 }

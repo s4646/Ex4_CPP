@@ -34,7 +34,7 @@ namespace coup
                         coupedWho = &other;
                         assassinate=true;
                         if((*game).getPlayers().size() == 2) {(*game).coup(other);}
-                        else {(*game).decrementPlayers();}
+                        // else {(*game).decrementPlayers();}
                         if((*game).index()==(*game).getNumOfPlayers() || (*game).getPlayers().at((size_t)(*game).index()) == this)
                         {
                             (*game).handleIndex();

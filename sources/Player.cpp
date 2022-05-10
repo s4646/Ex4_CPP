@@ -18,6 +18,7 @@ namespace coup
         this->is_foreign_aid = false;
         coupedWho = nullptr;
         blockedWho = nullptr;
+        applied = nullptr;
         (*game).addPlayer(*this);
     }
     Player::~Player() {};
@@ -60,11 +61,17 @@ namespace coup
                     coupedWho = &other;
                     this->Coins-=COUP_PAYMENT;
                     (*game).coup(other);
-                    if((*game).index()==(*game).getNumOfPlayers() || (*game).getPlayers().at((size_t)(*game).index()) == this)
+                    if((*game).index()==(*game).getNumOfPlayers())
                     {
                         (*game).handleIndex();
+                        return;
                     }
-                return;
+                    if((*game).index() < (*game).getPlayers().size() && (*game).getPlayers().at((size_t)(*game).index()) == this)
+                    {
+                        (*game).handleIndex();
+                        return;
+                    }
+                    return;
                 }
             }
         }

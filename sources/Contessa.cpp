@@ -12,6 +12,7 @@ namespace coup
     void Contessa::block(Player& other)
     {
         Player* ptr = nullptr;
+        if (other.coupedWho == nullptr) {throw runtime_error("Cannot block");}
         for (size_t i = 0; i < (*game).getPlayers().size(); i++)
         {
             if((*game).getPlayers().at(i)->getName() == other.coupedWho->name)
@@ -21,7 +22,7 @@ namespace coup
                 ptr = (*game).getPlayers().at(i);
                 (*ptr).couped = false;
                 other.coupedWho = nullptr;
-                (*game).incrementPlayers();
+                // (*game).incrementPlayers();
                 return;
                 }
             }

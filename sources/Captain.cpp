@@ -18,13 +18,15 @@ namespace coup
             other.Coins -= 2;
             stolen_coins = 2;
             (*game).handleIndex();
+            return;
         }
-        if(other.Coins<2 && other.Coins>=0)
+        if(other.Coins<2 && other.Coins>0)
         {
             this->Coins += other.Coins;
             stolen_coins = other.Coins;
             other.Coins = 0;
             (*game).handleIndex();
+            return;
         }
         throw runtime_error("Cannot steal.");
     }

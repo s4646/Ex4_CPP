@@ -20,6 +20,7 @@ namespace coup
             int index() const;
             std::vector<Player*> getPlayers();
             void handleIndex();
+            void resetIndex();
             void decrementPlayers();
             void incrementPlayers();
             std::string winner();

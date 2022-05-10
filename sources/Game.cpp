@@ -48,6 +48,7 @@ namespace coup
                 {
                     Players.erase(Players.begin()+(long)i);
                     numOfPlayers--;
+                    return;
                 }
                 else
                 {
@@ -55,7 +56,7 @@ namespace coup
                 }
             }
         }
-        throw runtime_error("Player not found");
+        // throw runtime_error("Player not found");
     }
     int Game::index() const{return currentIndex;}
     vector<Player*> Game::getPlayers()
@@ -66,12 +67,17 @@ namespace coup
     {
         currentIndex++;
         if(currentIndex>=Players.size()) {currentIndex=0;}
+        while(Players.at((size_t)currentIndex)->isCouped())
+        {
+            currentIndex++;
+            if(currentIndex>=Players.size()) {currentIndex=0;}
+        }
     }
     string Game::winner()
     {
         if(Players.size()==1)
         {
-            return players().at(1);
+            return players().at(0);
         }
         throw runtime_error("Game not done");
     }

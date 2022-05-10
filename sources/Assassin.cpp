@@ -28,11 +28,13 @@ namespace coup
                     this->Coins-=3;
                     coupedWho = other.name;
                     assassinate=true;
-                    (*game).decrementPlayers();
+                    if((*game).getPlayers().size() == 2) {(*game).coup(other.getName());}
+                    else {(*game).decrementPlayers();}
                     (*game).handleIndex();
                     return;
                 }
             }
+            throw runtime_error("Player not found");
         }
         else
         {

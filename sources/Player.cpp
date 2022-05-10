@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include <stdexcept>
+#include <iostream>
 
 using namespace coup;
 using namespace std;
@@ -59,24 +60,18 @@ namespace coup
                 other.couped = true;
                 coupedWho = other.name;
                 this->Coins-=COUP_PAYMENT;
-                (*game).decrementPlayers();
+                (*game).coup(other.getName());
                 (*game).handleIndex();
                 return;
             }
         }
+        cout << (*game).index() << '\n';
         throw runtime_error("Player not found");
     }
     void Player::validate()
     {
         if((*game).getPlayers().at((size_t)(*game).index())->getName() != name)
         {
-            if((*game).index() == 0)
-            {
-                if((*game).getPlayers().at((size_t)(*game).index())->isCouped() && (*game).getPlayers().at((size_t)(*game).index()+1)->getName() == name)
-                {
-                    (*game).handleIndex();
-                }
-            }
             throw runtime_error("Not your turn");
         }
         if(this->couped)
